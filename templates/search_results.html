@@ -1,0 +1,66 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="s006">
+
+		{% if not hits %}
+		<hgroup class="mb20">
+			<h2 class="lead" id="not-results"><strong class="text-danger">{{  query  }}</strong> என்ற தேடலுக்கு முடிவுகள் கிடைக்கவில்லை</h2>
+			<h2 class="lead" id="not-result">தேடலுக்கு அண்ணளவாக <strong class="text-danger">({{  time  }}ms)</strong> நேரம் எடுத்துள்ளது </h2>
+		</hgroup>
+		{% endif %}
+		{% if hits %}
+		<hgroup class="mb20">
+			<h1>தேடல் முடிவுகள்</h1>
+			<h2 class="lead" id="results"><strong class="text-danger">{{  query  }}</strong>என்ற தேடலுக்கான <strong class="text-danger">{{ num_results }}</strong>  முடிவுகள் கிடைத்துள்ளது</h2>
+			<h2 class="lead" id="result">தேடலுக்கு அண்ணளவாக <strong class="text-danger">({{  time  }}ms)</strong> நேரம் எடுத்துள்ளது </h2>
+		</hgroup>
+
+		<section id='song_section' class="col-md-8">
+			{% for hit in hits %}
+			<article class="search-result row">
+				<div class="col-md-12">
+					<h3><b>{{ hit._source.பாடல் }}</b></h3>
+					<ul class="meta-search">
+						<li><i class="glyphicon glyphicon-tags"></i> <span>திரை படம்: {{ hit._source["திரை படம்"] }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>வருடம்: {{ hit._source.வருடம் }}</span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>இசையமைப்பாளர்: {{ hit._source.இசையமைப்பாளர் }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>பாடலாசிரியர்: {{ hit._source.பாடலாசிரியர் }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>பாடியவர்கள்: {{ hit._source.பாடியவர்கள்}}</span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>உருவகம் 1: {{ hit._source["உருவகம் 1"]}} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>கருத்து 1: {{ hit._source["கருத்து 1"]}} </span></li>
+						{% if hit._source["உருவகம் 2"] %}
+						<li><i class="glyphicon glyphicon-tags"></i> <span>உருவகம் 2: {{ hit._source["உருவகம் 2"]}} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>கருத்து 2: {{ hit._source["கருத்து 2"]}} </span></li>
+						{% endif %}
+						{% if hit._source["உருவகம் 3"] %}
+						<li><i class="glyphicon glyphicon-tags"></i> <span>உருவகம் 3: {{ hit._source["உருவகம் 3"]}} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>கருத்து 3: {{ hit._source["கருத்து 3"]}} </span> </li>
+						{% endif %}
+						<li><i class="glyphicon glyphicon-tags"></i> <span>பாடல்வரிகள்: {{ hit._source.பாடல்வரிகள்}} </span></li>
+					</ul>
+				</div>
+				<div class="col-md-6">
+
+				</div>
+				<span class="clearfix borda"></span>
+			</article>
+			{% endfor %}
+		</section>
+
+
+<!--		{% else %}-->
+<!--			{% if init %}-->
+<!--				<hgroup class="mb20">-->
+<!--				<h1>Director Database</h1>-->
+<!--				<h2 class="lead">Please enter the search query in the box</strong></h2>-->
+<!--			</hgroup>-->
+<!--			{% else %}-->
+<!--			<hgroup class="mb20">-->
+<!--				<h1>Search Results</h1>-->
+<!--				<h2 class="lead"><strong class="text-danger">0</strong> results were found for the search for <strong class="text-danger">{{  query  }}</strong></h2>-->
+<!--			</hgroup>-->
+			{% endif %}
+		{% endif %}
+	</div>
